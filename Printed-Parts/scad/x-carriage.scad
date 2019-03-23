@@ -24,7 +24,7 @@ module belt_cut()
         }
     }
 }
-
+ 
 
 module x_carriage_base()
 {
@@ -37,7 +37,7 @@ module x_carriage_base()
     
     // Base plate
     translate([-34,-14,0]) cube([34.5,70.5,7]);
-    translate([-33,-15,0]) cube([33,7,15]);
+    translate([-34,-15,0]) cube([35,7,15]);
     translate([-42.5,53.0,0]) cube([52,6.5,15]);
  
     difference()
@@ -51,7 +51,7 @@ module x_carriage_base()
     }
  
     // upper motor screw block
-    translate([-23,56.8,0]) rotate([0,0,0]) cube([32.5,18.2,8]); 
+    translate([-34,56.8,0]) rotate([0,0,0]) cube([43.5,19.7,8]); 
      
     // Belt holder base
     translate([-42.5,20,0]) cube([52,16,7]);
@@ -92,18 +92,23 @@ module x_carriage_holes()
     translate([-45,52.5,12]) cube([13.5,10,5]); 
     
     // Extruder mounting holes
-    translate([-17.5+12,24.5,-1])cylinder(r=1.65, h=20, $fn=25);
-    translate([-17.5+12,24.5,-0.1])cylinder(r1=2.1,r2=1.65, h=0.5, $fn=25);
-    translate([-17.5+12,24.5,12])cylinder(r=5.8/2, h=20, $fn=25); 
+    translate([-7,15.5,-1])cylinder(r=1.65, h=20, $fn=25);
+    translate([-27,15.5,-1])cylinder(r=1.65, h=20, $fn=25);
 
-    translate([-16.5-12,24.5,-1])cylinder(r=1.65, h=20, $fn=25);
-    translate([-16.5-12,24.5,-0.1])cylinder(r1=2.1,r2=1.65, h=0.5, $fn=25);
-    translate([-16.5-12,24.5,12])cylinder(r=5.8/2, h=20, $fn=25); 
+    translate([-7,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2, $fn=25);
+    translate([-27,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2, $fn=25);
+        
+    translate([-7,15.5,4])cylinder(r=3.1, h=4, $fn=6);
+    translate([-27,15.5,4])cylinder(r=3.1, h=4, $fn=6);
+    translate([-7,15.5,7])cylinder(r=4, h=30, $fn=6);
+    translate([-27,15.5,7])cylinder(r=3.5, h=30, $fn=6);
     
+    
+        
     // Carriage slimer
     translate([-55.5+3,19,-1])cube([10,40,30]);
     translate([+12.5-3,19,-1])cube([10,40,30]);
-    translate([+12.5-3.5-2,30.8,-1])rotate([0,90-65,0])cube([10,55,30]);
+    translate([+12.5-3.5-2,35.8,-1])rotate([0,90-65,0])cube([10,55,30]);
     translate([-55.5+6.7+2,19,-10])rotate([0,-90+65,0])cube([10,40,30]);
    
 }
@@ -111,18 +116,21 @@ module x_carriage_holes()
 module x_carriage_fancy()
 {
     // Top right corner
-    translate([11.5,8,0]) translate([0,45+11.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
+    translate([11.5,10.5,0]) translate([0,45+11.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,40,20]);
+    translate([12,65.3,-1]) rotate([0,0,45]) cube([10,10,20]);
+    translate([4.9,72.38,-1]) cube([10,10,20]);
+    
     
     // Top left corner
     translate([-33-13.5,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);	
- 
-    translate([-27,74.5,9]) rotate([0,45,0]) translate([0,-15,0]) cube([5,25,5]);	   
-    translate([-23,86,16]) rotate([45,0,0]) translate([0,-15,0]) cube([45,5,5]);	   
+    
+    translate([-35,93,5]) rotate([35,0,0]) translate([0,-15,0]) cube([55,15,15]);	   
+    translate([7.5,59.5,-18]) rotate([0,0,0]) cube([20,20,40]);
     
     // bottom side edges
-    translate([-40,-15,-5]) rotate([30,0,0]) cube([45,6,15]);
+    translate([-37,-12,-6]) rotate([40,0,0]) cube([50,8,25]);
     translate([-35,-19.2,0]) rotate([0,0,45]) cube([6,6,16]);
-    translate([2,-19.2,0]) rotate([0,0,45]) cube([6,6,16]);
+    translate([2,-20.4,0]) rotate([0,0,45]) cube([6,6,16]);
     translate([2,55.9,12]) rotate([0,0,45]) cube([6,6,16]);
     translate([-33.5,55.9,12]) rotate([0,0,45]) cube([6,6,16]);
     
@@ -156,12 +164,14 @@ module cable_tray()
     translate([-2,11,7]) cube([11.45,2,8]);
     
     translate([-31,11.5,7]) cube([30,1.5,8]);
-        
-    difference(){ 
-    translate([0,11,0]) cube([9.50,12,7]);
+     
+    
+    difference()
+    { 
+    translate([0,11,0]) cube([9.50,22,7]);
     translate([0,6,1])rotate([-30,0,0]) cube([7.5,12,7]);
-    translate([0,3.5,6])rotate([-60,0,0]) cube([7.5,12,7]);
-    translate([0,10+3,-1])cube([7.5,11,6]);    
+    translate([0,10+3,-1])cube([7.5,19,6]);    
+    
     }
     
     
@@ -175,38 +185,44 @@ module final_cutout()
     translate([6,0,16]) rotate([0,45,0]) cube([5,15,5]);
     
     // motor cable opening
-    translate([0.5,10+3,-1])cube([7,9.2,6]);    
-    
-    // filament hole
-      
-    
-    difference () {
-        
-        union() {
-    translate([-14.199,9.05,0]) rotate([-5,0,22.5]) cylinder(r=1.62, h=40, $fn=8);    
-    translate([-14.5,9.7,8]) rotate([-5,0,22.5]) cylinder(r=1.62,r2=3, h=8, $fn=8);  
+    difference()
+    {
+        union()
+        {
+            translate([0.5,10,-1]) cube([8,18,6]);    
+            translate([0.5,28,0]) rotate([0,90,0]) cylinder(r=5, h=8, $fn=25);    
+            translate([0.5,12,0.5]) rotate([45,0,0]) cube([8,4,6]);    
         }
-   //translate([-18,6.7,12])   cube([7,7,5]); 
+        translate([7.8,10,8]) rotate([0,85,0]) cube([15,25,10]);    
+    }
         
+        
+        
+    // filament hole
+    difference () 
+    {
+        union() 
+        {
+        translate([-14.199,9.05,0]) rotate([-5,0,22.5]) cylinder(r=1.62, h=40, $fn=8);    
+        translate([-14.5,9.7,8]) rotate([-5,0,22.5]) cylinder(r=1.62,r2=3, h=8, $fn=8);  
+        }
     }
     
     // bottom back mounting screws
-    translate([-6.5,-11,4]) cylinder(r=1.65, h=20, $fn=50);  
-    translate([-26.5,-11,4]) cylinder(r=1.65, h=20, $fn=50); 
+    translate([-22,-11,4]) cylinder(r=1.65, h=20, $fn=50); 
    
-    difference() {
-    union(){    
-    translate([-29.3,-14,10]) cube([5.6,7,2.1]);
-    translate([-09.3,-14,10]) cube([5.6,7,2.1]);
-    }
-         translate([-36,-8.1,10]) cube([40,1,0.5]);
+    difference() 
+    {
+        union()
+        {    
+            translate([-24.8,-14,10]) cube([5.6,7,2.1]);
+        }
+       translate([-36,-8.1,10]) cube([40,1,0.5]);
     } 
+
     // better printing bridges
-    translate([-29.3,-12.65,10.35]) cube([5.6,3.3,2.1]);
-    translate([-09.3,-12.65,10.35]) cube([5.6,3.3,2.1]);
-    translate([-28.15,-12.65,10.7]) cube([3.3,3.3,2.1]);
-    translate([-8.15,-12.65,10.7]) cube([3.3,3.3,2.1]);
-    
+    translate([-24.8,-12.65,10.35]) cube([5.6,3.3,2.1]);
+    translate([-23.65,-12.65,10.7]) cube([3.3,3.3,2.1]);
     
     
     // x-carriage-back mounting screws
@@ -232,8 +248,38 @@ module final_cutout()
     translate([-18.8,27.35,10.9]) cube([5.6,3.3,2.1]);
     translate([-17.65,27.35,11.25]) cube([3.3,3.3,2.1]);
     
-    // opening for power cables to hotend & termistor cable
-    translate([-16.5,-18,-5]) rotate([-5,0,0]) cylinder(r=6, h=40, $fn=30);  
+    // selective infill
+    translate([-23.7,57,5]) cube([15.9,0.7,9]);
+    translate([-23.7,54.5,5]) cube([15.9,0.7,9]);
+    
+    difference()
+    {
+        union()
+        {
+        translate([-11,-12,1]) rotate([0,0,0]) cylinder(r=3, h=10, $fn=30);  
+        translate([-11,-15,-0]) cube([3,6,10]);  
+        }
+       translate([-8,-20,5]) rotate([0,-20,0]) cube([10,20,10]);  
+    }
+    
+    translate([0.5,-0,5])
+    difference()
+    {
+        rotate([0,-20,0])
+        union()
+        {
+        translate([-7,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30, $fn=30);  
+        translate([-9,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30, $fn=30);  
+        translate([-12,-18,-5]) cube([8,6,30]);  
+        translate([-9,-15,-5]) cube([2,6,30]);  
+        }
+
+        translate([-20,-20,-15]) cube([20,20,10]);  
+    }
+    
+    // 2.5 endstop hole
+    translate([-8,-11,11]) rotate([0,90,0]) cylinder(r=1.4, h=10, $fn=30);  
+    translate([-0.5,-11,11]) rotate([0,90,0]) cylinder(r1=1.4, r2=1.7, h=2, $fn=30);  
     
 }
 
@@ -265,29 +311,23 @@ module x_carriage()
             // upper motor screw
             translate([2.5,67.5,-50]) cylinder(r=1.8, h=100, $fn=30);
             translate([2.5,67.5,-0.1]) cylinder(r1=2.1,r2=1.8, h=0.5, $fn=25);
-            translate([2.5,67.5,5]) cylinder(r=3.2, h=8, $fn=30);
+            translate([2.5,67.5,7.5]) cylinder(r=3.2, h=7, $fn=30);
+            
+            translate([-28.5,67.5,7.5])cylinder(r=3.2, h=20, $fn=25);    
+            translate([-28.5,67.5,-1])cylinder(r=1.65, h=20, $fn=25);    
+            translate([-28.5,67.5,-1])cylinder(r2=1.65, r1=3, h=2, $fn=25);    
+        
             translate([0.5,22.5,0]) rotate([0,90,0]) cylinder(r=5.2, h=7.0, $fn=25);
 
-            // cable management cleanup
-            difference()
-            {
-                translate([2.5,21.5,0]) rotate([0,90,0]) cylinder(r=5.2, h=5.0, $fn=25);
-                translate([2,16,-10]) cube([10,6,20]);
-            }
 
             // selective infill
-            
             translate([5,-15.4,-1]) rotate([0,45,0]) cube([0.3,4.6,8]);        
-            translate([8.45,11.5,1]) cube([0.5,1.8,4]);        
-            
             translate([5,-16.4,-1]) rotate([0,45,0]) cube([0.3,0.5,8]);        
             translate([5,-10.3,-1]) rotate([0,45,0]) cube([0.3,0.5,8]);    
             translate([6,-16.5,-1]) cube([1,0.5,5]);        
             translate([3,-16.5,-1]) cube([2,0.5,5]);  
             translate([6,-10.2,-1]) cube([1,0.5,5]);        
             translate([3,-10.2,-1]) cube([2,0.5,5]);  
-            translate([6,7.5,-1]) cube([1,0.5,5]);  
-            translate([6,10.5,-1]) cube([1,0.5,5]);  
             
             translate([-19,24,1.5]) cube([6,0.5,12.0]);      
                         
@@ -296,22 +336,61 @@ module x_carriage()
             translate([-2.9,7.5,18]) rotate([0,80,0]) cube([20,3.55,5]);
             
             // filament sensor connector
-            translate([-12.5,64,-3]) cube([4,11.2,14]);
-            translate([-12.5,65.75,-3]) cube([5,2.5,14]);
-            translate([-12.5,71.75,-3]) cube([5,2.5,14]);
-            translate([-14.5,67,-3]) cube([4,6,14]);
-            translate([-14.5,65,4.7]) cube([4,10.2,5]);
-            translate([-12.5,54.5,8]) cube([3.5,10.2,14]);
-            translate([-12.5,57.5,9.5]) rotate([35,0,0]) cube([3.5,10.2,14]);
-            translate([-12.5,58,8]) rotate([0,0,45]) cube([3,3,14]);
-            translate([-10,58,8]) rotate([0,0,45]) cube([3,3,14]);
+            translate([-1.5,62,-1.3]) cube([1,5,5]);
+            translate([-3.5,65,-1.3]) cube([3,5,5]);
+            translate([-9,70.6,-1.3]) cube([9,15,15]);
+            translate([-8.5,68,-1.3]) cube([8,15,15]);
+            translate([-0.7,67.5,7.5]) cube([3.2,3.2,1]);
+            difference()
+                {
+                translate([-9,69,-1]) cube([8.5,6,7]);
+                translate([-9,77,2]) rotate([45,0,0]) cube([8.5,6,7]);
+                }
+            
+            // filament sensor cable
+            difference()
+            {
+                translate([-1.5,30,-0.8]) cube([3.5,30,4.5]);
+
+                translate([0.5,34.46,-4]) cube([4,3,4.5]);
+                translate([2,34.46,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+                translate([2,34.46+3,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+                
+                translate([0.5,54,-4]) cube([4,3,4.5]);
+                translate([2,54,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+                translate([2,57,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+                
+                translate([-4.0,44,-4]) cube([4,3,4.5]);
+                translate([-1.5,44,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+                translate([-1.5,47,-4]) cylinder(r=1.5, h=4.5, $fn=25); 
+            }
+                
+            translate([-1.05,58.25,-0.8]) rotate([0,0,30]) cube([3.5,13,4.5]);
+            translate([-9,66,-0.8]) cube([3.5,5,4.5]);
+            
+            translate([-9,70.5,-0.8]) rotate([45,0,0]) cube([9,6,6]);
+            
+            translate([0.45,30,-0.8]) cylinder(r=2, h=4.5, $fn=25); 
+            translate([-3.5,68,3]) cylinder(r=2, h=6, $fn=25); 
+            translate([-6.75,69,-0.8]) cube([4,10,10]);
+         
+            
+            
+            
+            // hold together screws clearance
+            translate([-4.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10, $fn=25);    
+            translate([-28.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10, $fn=25);    
+            translate([-4.5,25.5,-1]) cylinder(r2=2,r1=3,h=3, $fn=25);    
+            translate([-28.5,25.5,-1]) cylinder(r2=2,r1=3,h=3, $fn=25);    
+            
             
             translate([0,-0.5,0]) left_belt_cut();
             translate([0,0.5,0]) right_belt_cut();
             
             //version
-            translate([-2,-8,0.5]) rotate([0,180,0]) linear_extrude(height = 0.6) 
-            { text("R3",font = "helvetica:style=Bold", size=5, center=true); }
+            translate([-11,-2,0.7]) rotate([0,180,0]) linear_extrude(height = 0.75) 
+            { text("R4",font = "helvetica:style=Bold", size=6, center=true); }
+
 
     }
 }
@@ -339,7 +418,7 @@ module left_belt_cut()
             translate([-82.42,25,7]) cube([37.5,10,30]);
             }
         }
-        translate([-45,17.6,4]) rotate([0,0,-15]) cube([10,3,30]);
+        translate([-45,18,4]) rotate([0,0,-13.5]) cube([10.5,3,32]);
         translate([-31.5,30.4,10]) rotate([-10,0,15]) cylinder(r=0.2, h=100, $fn=30);
         translate([-31.6,30.75,7]) rotate([0,0,0]) cylinder(r=0.2, h=100, $fn=30);
     }
@@ -374,7 +453,6 @@ module right_belt_cut()
     }
 
 x_carriage();
-    
   
     
  

@@ -1,111 +1,102 @@
 // PRUSA iteration4
-// Extruder idler
+// extruder idler
 // GNU GPL v3
 // Josef Průša <iam@josefprusa.cz> and contributors
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
- 
 
-module part()
+module nut_bp(diameter,head,layer)
 {
- 
+    difference()
+    {
+        cylinder(h = 2, r=head, $fn=6);
+        
+        translate([-5-diameter,-5,2-layer*2])cube([5,10,2]);
+        translate([diameter,-5,2-layer*2])cube([5,10,2]);
+        translate([-5,-5-diameter,2-layer])cube([10,5,2]);
+        translate([-5,diameter,2-layer])cube([10,5,2]);
+    }
+    cylinder(h = 5, r=diameter, $fn=40);
+}
+    
+
+module idler()
+{
     difference()
     {
         union()
         {
-            // base shape
-            translate([-11.5,42.5,-31.5])  cylinder( h=25, r=5, $fn=50 ); 
-            translate([-17,12,-31.5]) cube([8,34,25.0]);   
+            translate([6,-33.5,-15]) cube([10.5,30,25.5]); 
+            translate([11.5,-5,-16.5]) cylinder(h = 27, r=5, $fn=60); 
+            translate([11.5,-4,-10]) cube([5,4,20.5]); 
             
-            // pulley holders
-            translate([-4,27,-22.75])  cylinder(h=1, r1=4, r2=3, $fn=50); 
-            translate([-4,27,-27])  cylinder(h=4.25, r=4, $fn=50); 
-            translate([-14,22,-26.75]) cube([10.5,10,4]);   
-            translate([-16.5,22,-6.5]) cube([13,10,3]);   
-            translate([-4,27,-6.5])  cylinder(h=3, r=4, $fn=50); 
-            translate([-4,27,-7.25])  cylinder(h=0.75, r1=3, r2=4, $fn=50); 
+            translate([4,-24.7,-15]) cube([10.5,8.4,16]); 
+            translate([4,-24.70,-9]) cube([10.5,8.4,16]); 
+            translate([4,-20.5,-15]) cylinder(h = 18, r=4.2, $fn=60);
+            translate([4,-20.5,2]) cylinder(h = 5, r=4.2, $fn=60);
         }
-
-        // motor rim cut
-        translate([7,27,-32.75])  cylinder( h=6, r=18, $fn=80 ); 
         
-        // axis
-        translate([-4,27,-32])  cylinder( h=40, r=1.45, $fn=50 ); 
-    
-        translate([-11.5,42.5,-32])  cylinder( h=30, r=1.65, $fn=50 ); 
-        translate([-18,44,-32]) rotate([0,0,30]) cube([15,10,30]);   
-        translate([-18,47,-32]) cube([15,10,30]);   
-        translate([-16,0.5,-32]) rotate([0,0,30]) cube([15,10,30]);   
-        translate([-18,3,-33]) cube([15,10,30]);   
+        // turn around screw
+        translate([11.5,-5,-25]) cylinder(h = 40, r=1.7, $fn=60); 
         
-        // idler nuts
-        translate([-15,15.7,-39.4]) cube([2.1,5.6,16]);   
-        translate([-15,15.7,-14.6]) cube([2.1,5.6,16]); 
-        // better printing
-        translate([-14.7,15.6,-28.2]) cube([2.1,5.8,3.4]);   
-        translate([-14.4,16.8,-28.2]) cube([2.1,3.4,3.4]);   
-        translate([-14.7,15.6,-13.2]) cube([2.1,5.8,3.4]);   
-        translate([-14.4,16.8,-13.2]) cube([2.1,3.4,3.4]);   
+        // bondtech shaft
+        translate([4,-20.5,-25]) cylinder(h = 40, r=1.5, $fn=60);
         
-        // idler screws
-        translate([-18,18.5,-26.5]) rotate([0,90,0]) cylinder( h=45, r=1.7, $fn=50 );  
-        translate([-18,18.5,-11.5]) rotate([0,90,0]) cylinder( h=45, r=1.7, $fn=50 );    
-        translate([-18,18.5,-26.5]) rotate([0,90,0]) cylinder( h=2.5, r1=3, r2=1.7, $fn=50 );  
-        translate([-18,18.5,-11.5]) rotate([0,90,0]) cylinder( h=2.5, r1=3, r2=1.7, $fn=50 );    
-
-        translate([-12,18.5,-26.5]) rotate([0,90,0]) cylinder( h=4, r1=1.7, r2=2.2, $fn=50 );  
-        translate([-12,18.5,-11.5]) rotate([0,90,0]) cylinder( h=4, r1=1.7, r2=2.2, $fn=50 );    
-
-        translate([-5.3,16.2,-33]) rotate([0,0,30]) cube([5,5,40]); 
-        translate([-7.8,33.5,-33]) rotate([0,0,-30]) cube([5,5,40]); 
+        // bontech space
+        translate([4,-20.5,-11.2]) cylinder(h = 14.4, r=5, $fn=60);
+        translate([4,-20.5,-11.2]) cylinder(h = 5, r=5.5, $fn=60);
         
-        translate([-18,29,-17.6]) rotate([90,0,0]) rotate([0,90,0]) cylinder( h=10, r1=9, r2=6, $fn=6 );  
+        translate([-13.8,-13,-20]) rotate([0,0,-8]) cube([20,20,35]);  
+        translate([-5.76,-40.88,-20]) rotate([0,0,-36]) cube([20,20,35]);  
         
-        // nice edges
-        translate([-26,10,-2]) rotate([0,45,0]) cube([10,40,10]); 
-        translate([-26,10,-35.5]) rotate([0,45,0]) cube([10,40,10]); 
-        translate([-10,2,-35]) cube([20,20,50]); 
+        translate([-2,-44.7,-20]) cube([10,20,35]);  
+ 
         
-        //selective infill
-        translate([-11,24,-5]) cube([5,6,0.2]); 
-        translate([-11,24,-26]) cube([5,6,0.2]); 
+        // tension screw
+        translate([-20,-28,-4]) rotate([0,90,0]) cylinder(h = 60, r=1.7, $fn=60);
+        translate([0,-28,-4]) rotate([0,90,0]) cylinder(h = 10, r2=1.7, r1=3, $fn=60);
+        translate([2,-27,-4]) rotate([5,90,0]) cylinder(h = 10, r2=1.7, r1=3, $fn=60);
         
-        // filament sensor cleaning window
-        translate([-20,43,-18.5])  rotate([90,0,90]) cylinder( h=15, r=3, $fn=30 ); 
-        translate([-20,43,-21.5]) cube([21,10,6]);
+        translate([13.2,-28,-4]) rotate([0,90,0]) cylinder(h = 5, r=3.1, $fn=6);
+        translate([14.6,-28,-4]) rotate([0,-90,0]) nut_bp(1.7,3.1,0.3);
+        
+        translate([15,-28,-4]) rotate([0,90,0]) cylinder(h = 2.5, r1=3.1,r2=3.6, $fn=6);
+        translate([5.5,-28,-4]) rotate([0,90,0]) cylinder(h = 7, r2=1.7, r1=2.5, $fn=30);
+        
+        translate([0,-16,-2.9]) rotate([0,90,0]) rotate([0,0,90])cylinder(h = 25, r=7, $fn=6);
+        
+        translate([11.5,-5,-17]) cylinder(h = 7, r=5.5, $fn=60); 
+        translate([5,-9,-17]) cube([15,10,7]); 
+        translate([-3,-10.5,-17]) cube([15,10,7]); 
+        
+        //edge
+        translate([19,-5,-18]) rotate([0,0,45]) cube([20,20,30]);
+                
+        // motor rim
+        translate([-4,-20.5,7]) cylinder(h = 4, r=13.0, $fn=60);  
+        
+        // cleanup
+        translate([-12,-30,-11.2]) cube([20,10,14.4]);
     }
     
     difference()
-    {    
-        // side cut
-        translate([-17,22,-8]) cube([4,17,4.5]);   
-        translate([-9.5,33,-9]) rotate([0,0,45]) cube([10,10,6]);   
+    {
+        union()
+        {
+            translate([8,-28,-4]) rotate([0,90,0]) cylinder(h = 8, r=4, $fn=60);
+            translate([15.0,-32.5,-15]) cube([1.5,2,25.5]);  
+        }
         
-        // side cut edges
-        translate([-26,10,1]) rotate([0,45,0]) cube([10,40,10]); 
-        translate([-22.5,14,-10]) rotate([0,0,45]) cube([10,10,10]);     
-        translate([-22.5,33,-10]) rotate([0,0,45]) cube([10,10,10]);     
+        translate([13.2,-28,-4]) rotate([0,90,0]) cylinder(h = 5, r=3.1, $fn=6);
+        translate([14.6,-28,-4]) rotate([0,-90,0]) nut_bp(1.7,3.1,0.3);
+        
+        translate([15,-28,-4]) rotate([0,90,0]) cylinder(h = 2.5, r1=3.1,r2=3.6, $fn=6);
+        translate([-5,-46,-20]) rotate([0,0,-36]) cube([20,20,35]);  
+        
+        translate([2,-28,-4]) rotate([0,90,0]) cylinder(h = 10, r2=1.7, r1=3, $fn=60);
+        translate([2,-27,-4]) rotate([5,90,0]) cylinder(h = 10, r2=1.7, r1=3, $fn=60);
+        
     }
     
-    translate([-11.5,28,-8]) rotate([0,0,45]) cube([3,6,4.5]);   
-    
 }
-
-rotate([0,-90,0]) part();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+rotate([0,90,0]) idler();
